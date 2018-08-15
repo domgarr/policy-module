@@ -13,6 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.policy.data.Customer;
+import com.policy.data.Manager;
 
 @WebServlet("/login")
 public class Dummy extends HttpServlet {
@@ -21,11 +25,21 @@ public class Dummy extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		String uname = req.getParameter("username");
 		String password = req.getParameter("password");
-		
-		if(uname.equals(password) && uname.equals("admin"))
+		HttpSession session = req.getSession(true);
+		if(uname.equals(password) && uname.equals("admin")) {
+			Manager a = new Manager();
+			a.setFullname("Amr");
+			a.setManagerId(101);
+			session.setAttribute("user", a);
 			res.sendRedirect("view/admin.jsp");
-		else if(uname.equals(password) && uname.equals("customer"))
-			res.sendRedirect("customer.jsp");
+		}
+		else if(uname.equals(password) && uname.equals("customer")) {
+			Customer u = new Customer();
+			u.setFirstname("Ross");
+			u.setLastname("Geller");
+			u.setCustomerId(200);
+			res.sendRedirect("view/customer.jsp");
+		}
 		else {
 			PrintWriter out = res.getWriter();
 			out.println("Login error!!");

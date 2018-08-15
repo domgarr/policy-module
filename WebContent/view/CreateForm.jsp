@@ -106,7 +106,7 @@
   <form id="CreateFormUI" method= "post" action ="MainServlet" ">
   	<div class="form-group">
 		<table align="center" >
-			<h1 align="center"> Register Policy </h1>
+			<h1 align="center"> Register Policy</h1>
 			<tr> 
 			
 				<td> Policy Name </td>
