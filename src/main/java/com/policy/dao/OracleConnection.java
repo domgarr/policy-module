@@ -151,5 +151,4 @@ public enum OracleConnection {
 			e.printStackTrace();
 		}
 	}
-
 }
