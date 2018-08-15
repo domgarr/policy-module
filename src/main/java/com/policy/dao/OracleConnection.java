@@ -12,7 +12,7 @@ import java.sql.*;
  * Use the disconnect() method when connection needs to be closed.
  * 
  * To access the single instance of this enum use OracleConnection.INSTANCE
- * Example: ResultSet test = OracleConnection.Instance.executeQuery(query)
+ * Example: ResultSet test = OracleConnection.INSTANCE.executeQuery(query)
  * 
  * @author Nicholas, created 8/15
  *
@@ -25,42 +25,26 @@ public enum OracleConnection {
 	private static Statement st = null;
 	private static ResultSet rs = null;
 	private static PreparedStatement pst = null;
-
+	
+	
 	/**
-	 * Static block initializes the connection to the database - only needs
-	 * to be done once.
+	 * connect opens a connection to the oracle database. It will be called whenever
+	 * the database is accessed.
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
 	 */
-	static {
+	private void connect() throws ClassNotFoundException, SQLException {
+
+		Class.forName("oracle.jdbc.driver.OracleDriver");
 		
-		try {
-			//Driver informatoin
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//IP address, username and password
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		String uname = "system";
 		String pwd = "tcs12345";
 		
+		//step 2
+		con = DriverManager.getConnection(url, uname, pwd);
 		
-		try {
-			//Initialize connection
-			con = DriverManager.getConnection(url, uname, pwd);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
-			//Initialize statement
-			st = con.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		st = con.createStatement();
 	}
 	
 	/**
@@ -68,8 +52,11 @@ public enum OracleConnection {
 	 * retrieving information from database.
 	 * @param update The SQL command to be run
 	 * @return
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
-	public boolean executeUpdate(String update) {
+	public boolean executeUpdate(String update) throws ClassNotFoundException, SQLException {
+		connect();
 		try {
 			st.executeUpdate(update);
 			return true;
@@ -77,16 +64,24 @@ public enum OracleConnection {
 		catch (SQLException e) {
 			return false;
 		}
+		finally {
+			disconnect();
+		}
 	}
 	
 	/**
 	 * Use this method to retrieve information from the database only. Cannot be
 	 * used to change database in any way.
+	 * 
+	 * IMPORTANT!!!!! CALL DISCONNECT WHEN DONE WITH RESULTSET
+	 * 
+	 * 
 	 * @param query The SQL query to run
 	 * @return the ResultSet containing information from database. This is null if
 	 * there was an Exception.
 	 */
 	public ResultSet executeQuery(String query) {
+		
 		try {
 			rs = st.executeQuery(query);
 			return rs;
@@ -94,33 +89,10 @@ public enum OracleConnection {
 		catch (SQLException e) {
 			return null;
 		}
+		
 	}
 	
-	/**
-	 * Get a PreparedStatement to work with. It is your responsibility to handle
-	 * all potential SQLExceptions. 
-	 * @param query The prepared query
-	 * @return the PreparedStatement
-	 */
-	public PreparedStatement getPreparedStatement(String query) {
-		try {
-			pst = con.prepareStatement(query);
-			return pst;
-		}
-		catch (Exception e) {
-			return null;
-		}
-	}
 	
-	/**
-	 * If you wish to work with the Statement directly, this method allows you to 
-	 * do so. However, the executeUpdate and executeQuery methods provided in this enum
-	 * are recommended as they are safe.
-	 * @return the Statement
-	 */
-	public Statement getStatement() {
-		return st;
-	}
 	
 	/**
 	 * Used to close the connection.
@@ -128,28 +100,16 @@ public enum OracleConnection {
 	public void disconnect(){
 		try {
 			rs.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (SQLException e) {}
 		try {
 			st.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (SQLException e) {}
 		try {
 			pst.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (SQLException e) {}
 		try {
 			con.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (SQLException e) {}
 	}
 
 }
