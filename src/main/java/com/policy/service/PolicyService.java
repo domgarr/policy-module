@@ -19,7 +19,7 @@ public class PolicyService {
 	 * @param policy - An initialized policy object 
 	 * @return true if the policy was successfully added and false otherwise.
 	 */
-	boolean addPolicy(Policy policy){
+	public boolean addPolicy(Policy policy){
 		if(policy == null) {
 			System.out.println("Policy object given is null");
 			return false;
