@@ -4,6 +4,8 @@
 
 package com.policy.data;
 
+import java.util.Date;
+
 public class Policy {
 	private int policy_id;
 	private String policyType; //Updated by Domenic Garreffa on Aug 15, 2018
@@ -12,12 +14,49 @@ public class Policy {
 	private double tenure;
 	private double sum_assured;
 	private String pre_reqs;
+	private int payments_per_year; // Added by Patrick Yu on Aug 16, 2018
+	private double premiumAmount;
+	private Date start_date;
+	private int agent_id;
 	
 	public int getPolicyId() {
 		return policy_id;
 	}
-
 	
+	public void setPolicyId(int id) {
+		this.policy_id = id;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public double getPremiumAmount() {
+		return premiumAmount;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setPremiumAmonut(double amount) {
+		this.premiumAmount = amount;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public int getAgentId() {
+		return agent_id;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setAgentId(int id) {
+		this.agent_id = id;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public int getPaymentsPerYear() {
+		return payments_per_year;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setPaymentsPerYear(int numOfPayments) {
+		this.payments_per_year = numOfPayments;
+	}
+
 	//Added by Domenic Garreffa on Aug 15, 2018
 	public String getPolicyType() {
 		return policyType;
@@ -26,10 +65,6 @@ public class Policy {
 	//Added by Domenic Garreffa on Aug 15, 2018
 	public void setPolicyType(String policyType) {
 		this.policyType = policyType;
-	}
-
-	public void setPolicyId(int id) {
-		this.policy_id = id;
 	}
 
 	public String getPolicyName() {
@@ -70,5 +105,15 @@ public class Policy {
 
 	public void setPreReqs(String preReqs) {
 		this.pre_reqs = preReqs;
+	}
+
+	// Added by Patrick Yu on Aug 16, 2018
+	public Date getStartDate() {
+		return start_date;
+	}
+
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setStartDate(Date start_date) {
+		this.start_date = start_date;
 	}
 }
