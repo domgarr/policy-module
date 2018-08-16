@@ -12,7 +12,8 @@ public class Policy {
 	private String policy_name;
 	private int number_nominees;
 	private double tenure;
-	private double sum_assured;
+	private double min_sum;
+	private double max_sum;
 	private String pre_reqs;
 	private int payments_per_year; // Added by Patrick Yu on Aug 16, 2018
 	private double premiumAmount;
@@ -91,12 +92,20 @@ public class Policy {
 		this.tenure = tenure;
 	}
 
-	public double getSumAssured() {
-		return sum_assured;
+	public double getMinSum() {
+		return min_sum;
 	}
 
-	public void setSumAssured(double sum) {
-		this.sum_assured = sum;
+	public void setMinSum(double sum) {
+		this.min_sum = sum;
+	}
+
+	public double getMaxSum() {
+		return max_sum;
+	}
+
+	public void setMaxSum(double sum) {
+		this.max_sum = sum;
 	}
 
 	public String getPreReqs() {
