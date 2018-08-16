@@ -57,9 +57,6 @@ public class MainServlet extends HttpServlet {
   
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	   	
-    	
-	   	
 		   	HttpSession ses = request.getSession();
 		   	
 		   	String polName = request.getParameter("policy_name");
@@ -74,20 +71,24 @@ public class MainServlet extends HttpServlet {
 		   	double minSum = Double.parseDouble(request.getParameter("min"));
 		   	ses.setAttribute("min", minSum);
 		   	
-		   	String maxSum = request.getParameter("max");
+		   	double maxSum = Double.parseDouble(request.getParameter("max"));
 		   	ses.setAttribute("max", maxSum);
 		   	
 		   	String preReq = request.getParameter("pre-req");
 		   	ses.setAttribute("pre-req", preReq);
 		   	
+		   	String PolicyType = request.getParameter("policyType");
+		   	ses.setAttribute("policyType", PolicyType);
 		   	
 		   	Policy obj = new Policy();
+		   	
 		   	obj.setPolicyName(polName);
 		   	obj.setNumberNominees(numNominees);
 		   	obj.setTenure(numTenure);
-		   	obj.setSumAssured(minSum);
+		   	obj.setMinSum(minSum);
+		   	obj.setMaxSum(maxSum);
 		   	obj.setPreReqs(preReq);
-		   	obj.setPolicyType("ch");
+		   	obj.setPolicyType(PolicyType);
 		   	
 		   	ses.setAttribute("policy", obj);
 
@@ -95,7 +96,6 @@ public class MainServlet extends HttpServlet {
 		   	PolicyService obj1 = new PolicyService();
 		   	obj1.addPolicy(obj);
 		   	
-		   	//Add to session to object.
 		   	
 		   	response.sendRedirect("view/RegisterPolicySuccess.jsp");
 	 
