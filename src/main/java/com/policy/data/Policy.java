@@ -95,22 +95,6 @@ public class Policy {
 		this.tenure = tenure;
 	}
 
-	public double getMinSum() {
-		return min_sum;
-	}
-
-	public void setMinSum(double sum) {
-		this.min_sum = sum;
-	}
-
-	public double getMaxSum() {
-		return max_sum;
-	}
-
-	public void setMaxSum(double sum) {
-		this.max_sum = sum;
-	}
-
 	public String getPreReqs() {
 		return pre_reqs;
 	}
@@ -139,5 +123,21 @@ public class Policy {
 		for(Nominee n : myNominees) {
 			this.nominees.add(n);
 		}
+	}
+
+	public double getMinSum() {
+		return min_sum;
+	}
+
+	public void setMinSum(double min_sum) {
+		this.min_sum = min_sum;
+	}
+
+	public double getMaxSum() {
+		return max_sum;
+	}
+
+	public void setMaxSum(double max_sum) {
+		this.max_sum = max_sum;
 	}
 }

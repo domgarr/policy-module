@@ -11,7 +11,8 @@
 	policy.setPolicyId(1);
 	policy.setPolicyName("Tom cat");
 	policy.setTenure(1.1);
-	policy.setSumAssured(10200.50);
+	policy.setMinSum(100.50);
+	policy.setMaxSum(1000000.50);
 	policy.setPaymentsPerYear(2);
 	policy.setPremiumAmonut(2500);
 	policy.setStartDate(new Date());
@@ -35,7 +36,8 @@
 	int policyId = myPolicy.getPolicyId();
 	String policyName = myPolicy.getPolicyName();
 	double policyTenure = myPolicy.getTenure();
-	double sumAssured = myPolicy.getSumAssured();
+	//String sumAssured = "$" + (int)myPolicy.getMinSum() + " to $" + (int)myPolicy.getMaxSum();
+	String sumAssured = "12345";
 	List<Nominee> policyNominees = myPolicy.getNominees();
 	int paymentsPerYear = myPolicy.getPaymentsPerYear();
 	String premiumType;
