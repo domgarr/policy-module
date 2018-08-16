@@ -17,23 +17,19 @@ public class PolicyService {
 	public PolicyService() {
 		this.policyDao = new PolicyDao();
 	}
-
-
+	
+	
+	
 	/**
 	 * Generates a unique PolicyID and inserts a Policy into the database.
 	 * @param policy - An initialized policy object 
 	 * @return true if the policy was successfully added and false otherwise.
 	 */
 	public boolean addPolicy(Policy policy){
-		
-		
 		if(policy == null) {
 			System.out.println("Policy object given is null");
 			return false;
 		}
-		
-		System.out.println(policy.getPolicyName());
-		
 		
 		//Access PolicyDAO for max ID
 		Integer uniqueID = null;
