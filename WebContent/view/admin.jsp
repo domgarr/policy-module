@@ -15,7 +15,7 @@
 	</tr>
 	
 	<tr>
-		<td><button type="button" onclick="window.location.href = 'CreatePolicy.jsp';" value="newPolicy">Create Policy</button></td>
+		<td><button type="button" onclick="window.location.href = 'RegisterPolicy.jsp';" value="newPolicy">Create Policy</button></td>
 	</tr>
 	<tr>
 		<td><button type="button" onclick="window.location.href = 'UpdatePolicy.jsp';" value="updatePolicy">Update Policy</button></td>
