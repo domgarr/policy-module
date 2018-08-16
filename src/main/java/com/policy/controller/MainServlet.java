@@ -97,7 +97,7 @@ public class MainServlet extends HttpServlet {
 		   	obj1.addPolicy(obj);
 		   	
 		   	
-		   	response.sendRedirect("view/RegisterPolicySuccess.jsp");
+		   	response.sendRedirect("view/ViewPolicy.jsp");
 	 
 	}
 }
