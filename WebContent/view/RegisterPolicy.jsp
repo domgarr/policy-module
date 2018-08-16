@@ -1,3 +1,7 @@
+<%@ page import="com.policy.data.Policy" %>
+<%@ page import="java.io.IOException" %>
+
+<%@ page import="com.policy.service.PolicyService" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1,Unicode #8896 / U+22C1 " pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html> <!-- created by Hamza at 3pm   -->
 <html>
@@ -107,20 +111,27 @@
 		   var tenure  = document.forms["CreateFormUI"]["year"].value;
 		   var sumMin  = document.forms["CreateFormUI"]["min"].value;
 		   var sumMax  = document.forms["CreateFormUI"]["max"].value;
-		   var preReq  = null;
+		   var preReq  = document.forms["CreateFormUI"]["pre-req"].value;
 			
-		   var spanvar = document.getElementById("myspan");
-
-		   alert(spanvar.length)	;		
+		   	
+<%-- 		   <% 
+		   String polName = request.getParameter("policy_name");
+		   Policy obj = new Policy();
+		   obj.setPolicyName(polName);
+		   out.println(polName);
+		   out.println(numNominees);
 		   
-			
+		   
+		   %> --%>
+		   
+
 	   }
 	</SCRIPT>
 </head>
 <body>
 <div class="container">
   <div  id="form_style" >
-  <form id="CreateFormUI" method= "post" action ="MainServlet" onsubmit="getPar()" >
+  <form id="CreateFormUI" method= "post" action ="../MainServlet" onsubmit="getFormData(request,response)" >
   	<div class="form-group">
 		<table align="center" >
 			<h1 align="center"> Register Policy </h1>
@@ -168,7 +179,7 @@
 					     Max:<input type="text" id="max" name="max" value="1" oninput="validate()" />
 					</td>
 				</tr>
-				<tr> 
+<!-- 				<tr> 
 					<td> List Pre-Requisites</td>
 					<td>
 				   		
@@ -189,11 +200,17 @@
 						   </p>
 						</div>
 					</td>
-					
-
+				</tr> -->
+				
+				<tr>
+					<td> Pre-req </td>
+					<td><br><br>
+					<textarea rows="4" cols="50" placeholder="input your pre-req" name="pre-req">
+					</textarea>
+				 	</td>
 				
 				</tr>
-			
+				
 			
 		</table>
 		
@@ -209,6 +226,18 @@
 		</div>
 		</div>
 	</form>
+	
+	   
+		
+			   <% 
+			   	//response.sendRedirect("RegisterSuccess.jsp");
+			   
+			   %>
+			   	<%!  %> 
+			   	
+		   
+		   
+		  
 	</div>
 	</div>
 </body>
