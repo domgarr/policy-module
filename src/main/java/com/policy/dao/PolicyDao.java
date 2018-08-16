@@ -16,7 +16,7 @@ import com.policy.data.Policy;
 
 public class PolicyDao {
 	private final String tableName = "Policies_dom";
-	private final String INSERT_INTO_POLICY = "insert into " + tableName + "values(?,?,?,?,?,?,?)";
+	private final String INSERT_INTO_POLICY = "insert into " + tableName + " values(?,?,?,?,?,?,?)";
 	private final String SELECT_MAX_ID = "select MAX(policy_id) from " + tableName;
 	/**
 	 *  Will insert a policy object into the database.
@@ -71,6 +71,7 @@ public class PolicyDao {
 		ps = con.prepareStatement(SELECT_MAX_ID);
 		rs = ps.executeQuery();
 		
+		rs.next();
 		int maxID = rs.getInt(1);
 		
 		//clean up

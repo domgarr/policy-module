@@ -1,3 +1,7 @@
+<%@ page import="com.policy.data.Policy" %>
+<%@ page import="java.io.IOException" %>
+
+<%@ page import="com.policy.service.PolicyService" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1,Unicode #8896 / U+22C1 " pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html> <!-- created by Hamza at 3pm   -->
 <html>
@@ -78,8 +82,6 @@
 	   }
 	   function remove() {
 		     var element = document.createElement("input");
-		     element.setAttribute("type", "text");
-		     element.setAttribute("name", "mytext");
 		     var spanvar = document.getElementById("myspan");
 		     spanvar.removeChild(myspan.childNodes[0]);
 		     spanvar.removeChild(myspan.childNodes[0]);
@@ -88,6 +90,9 @@
 		   var checkMin=document.forms["CreateFormUI"]["min"].value;
 		   var checkMax=document.forms["CreateFormUI"]["max"].value;
 		   var checkTenure=document.forms["CreateFormUI"]["area"].value;
+		   
+		   document.getElementById("cust").value = checkTenure; //set the custom value field to num entered by user
+
 		   if(!checkMin.match(/^\d+$/)){
 			   document.forms["CreateFormUI"]["min"].value= checkMin.substring(0,checkMin.length-1);
 		   }
@@ -96,14 +101,37 @@
 		   }
 		   else if(!checkTenure.match(/^\d+$/)){
 			   document.getElementById("area").value = checkTenure.substring(0,checkTenure.length-1);
+
 		   }
+	   }
+	   
+	   function getPar(){
+		   var polName = document.forms["CreateFormUI"]["policy_name"].value;
+		   var numNom  = document.forms["CreateFormUI"]["nominee"].value;
+		   var tenure  = document.forms["CreateFormUI"]["year"].value;
+		   var sumMin  = document.forms["CreateFormUI"]["min"].value;
+		   var sumMax  = document.forms["CreateFormUI"]["max"].value;
+		   var preReq  = document.forms["CreateFormUI"]["pre-req"].value;
+			
+		   	
+<%-- 		   <% 
+		   String polName = request.getParameter("policy_name");
+		   Policy obj = new Policy();
+		   obj.setPolicyName(polName);
+		   out.println(polName);
+		   out.println(numNominees);
+		   
+		   
+		   %> --%>
+		   
+
 	   }
 	</SCRIPT>
 </head>
 <body>
 <div class="container">
   <div  id="form_style" >
-  <form id="CreateFormUI" method= "post" action ="MainServlet" ">
+  <form id="CreateFormUI" method= "post" action ="../MainServlet" onsubmit="getFormData(request,response)" >
   	<div class="form-group">
 		<table align="center" >
 			<h1 align="center"> Register Policy </h1>
@@ -138,7 +166,7 @@
 	    				<input type="radio" name="year" value="1" checked onclick="hide();"/> 1 Year<br>
 	  					<input type="radio" name="year" value="2" onclick="hide();"/> 2 Year<br>
 	  					<input type="radio" name="year" value="3" onclick="hide();" /> 3 Year <br>
-	    				<input type="radio" name="year" value="custom" onclick="show();" /> Custom	 
+	    				<input type="radio" name="year" value="custom" id="cust" onclick="show();" /> Custom	 
 	    				<input type="text" 	name="year" value="4" id="area" style= "display: none;" oninput="validate()">
  				
 	    			</td>
@@ -151,7 +179,7 @@
 					     Max:<input type="text" id="max" name="max" value="1" oninput="validate()" />
 					</td>
 				</tr>
-				<tr> 
+<!-- 				<tr> 
 					<td> List Pre-Requisites</td>
 					<td>
 				   		
@@ -172,17 +200,23 @@
 						   </p>
 						</div>
 					</td>
-					
-
+				</tr> -->
+				
+				<tr>
+					<td> Pre-req </td>
+					<td><br><br>
+					<textarea rows="4" cols="50" placeholder="input your pre-req" name="pre-req">
+					</textarea>
+				 	</td>
 				
 				</tr>
-			
+				
 			
 		</table>
 		
 		<div class="clearfix" align="center">
 			
-			<input type="submit" value="Register" id="check"/>
+			<input type="submit" value="Register" id="check" />
 			<button type="cancel" class="cancelbtn">Cancel</button>
 			
     	</div >
@@ -192,6 +226,18 @@
 		</div>
 		</div>
 	</form>
+	
+	   
+		
+			   <% 
+			   	//response.sendRedirect("RegisterSuccess.jsp");
+			   
+			   %>
+			   	<%!  %> 
+			   	
+		   
+		   
+		  
 	</div>
 	</div>
 </body>

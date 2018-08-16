@@ -10,7 +10,10 @@
 <body>	 
 	<% if(session.getAttribute("policy") == null){ %>
 	<h2> Policy was not created </h2> <%}else{ %>
-	<h2> <% out.print(((Policy)session.getAttribute("policy")).getPolicyName()); %></h2>
+	<h2> <% out.println(((Policy)session.getAttribute("policy")).getPolicyName()); 
+		out.println(((Policy)session.getAttribute("policy")).getPolicyName()); 
+		
+	%></h2>
 	<%}%>
 </body>
 </html>
