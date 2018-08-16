@@ -4,24 +4,63 @@
 
 package com.policy.data;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class Policy {
 	private int policy_id;
 	private String policyType; //Updated by Domenic Garreffa on Aug 15, 2018
 	private String policy_name;
 	private int number_nominees;
 	private double tenure;
-	private double sum_assured;
+	private double min_sum;
+	private double max_sum;
 	private String pre_reqs;
-	private double premiumAmount;
-	private boolean isActive;
-	private int agentID;
-	
-	
+	private int payments_per_year; // Added by Patrick Yu on Aug 16, 2018
+	private double premiumAmount; // Added by Patrick Yu on Aug 16, 2018
+	private Date start_date; // Added by Patrick Yu on Aug 16, 2018
+	private int agent_id; // Added by Patrick Yu on Aug 16, 2018
+	private List<Nominee> nominees = new ArrayList<Nominee>(); // Added by Patrick Yu on Aug 16, 2018
+
 	public int getPolicyId() {
 		return policy_id;
 	}
-
 	
+	public void setPolicyId(int id) {
+		this.policy_id = id;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public double getPremiumAmount() {
+		return premiumAmount;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setPremiumAmonut(double amount) {
+		this.premiumAmount = amount;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public int getAgentId() {
+		return agent_id;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setAgentId(int id) {
+		this.agent_id = id;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public int getPaymentsPerYear() {
+		return payments_per_year;
+	}
+	
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setPaymentsPerYear(int numOfPayments) {
+		this.payments_per_year = numOfPayments;
+	}
+
 	//Added by Domenic Garreffa on Aug 15, 2018
 	public String getPolicyType() {
 		return policyType;
@@ -30,10 +69,6 @@ public class Policy {
 	//Added by Domenic Garreffa on Aug 15, 2018
 	public void setPolicyType(String policyType) {
 		this.policyType = policyType;
-	}
-
-	public void setPolicyId(int id) {
-		this.policy_id = id;
 	}
 
 	public String getPolicyName() {
@@ -60,14 +95,6 @@ public class Policy {
 		this.tenure = tenure;
 	}
 
-	public double getSumAssured() {
-		return sum_assured;
-	}
-
-	public void setSumAssured(double sum) {
-		this.sum_assured = sum;
-	}
-
 	public String getPreReqs() {
 		return pre_reqs;
 	}
@@ -76,33 +103,41 @@ public class Policy {
 		this.pre_reqs = preReqs;
 	}
 
-
-	public int getAgentID() {
-		return agentID;
+	// Added by Patrick Yu on Aug 16, 2018
+	public Date getStartDate() {
+		return start_date;
 	}
 
-
-	public void setAgentID(int agentID) {
-		this.agentID = agentID;
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setStartDate(Date start_date) {
+		this.start_date = start_date;
 	}
 
-
-	public double getPremiumAmount() {
-		return premiumAmount;
+	// Added by Patrick Yu on Aug 16, 2018
+	public List<Nominee> getNominees() {
+		return nominees;
 	}
 
-
-	public void setPremiumAmount(double premiumAmount) {
-		this.premiumAmount = premiumAmount;
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setNominees(List<Nominee> myNominees) {
+		for(Nominee n : myNominees) {
+			this.nominees.add(n);
+		}
 	}
 
-
-	public boolean isActive() {
-		return isActive;
+	public double getMinSum() {
+		return min_sum;
 	}
 
+	public void setMinSum(double min_sum) {
+		this.min_sum = min_sum;
+	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public double getMaxSum() {
+		return max_sum;
+	}
+
+	public void setMaxSum(double max_sum) {
+		this.max_sum = max_sum;
 	}
 }

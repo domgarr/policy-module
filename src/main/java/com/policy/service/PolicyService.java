@@ -14,6 +14,12 @@ import com.policy.data.Policy;
 public class PolicyService {
 	private PolicyDao policyDao;
 	
+	public PolicyService() {
+		this.policyDao = new PolicyDao();
+	}
+	
+	
+	
 	/**
 	 * Generates a unique PolicyID and inserts a Policy into the database.
 	 * @param policy - An initialized policy object 
