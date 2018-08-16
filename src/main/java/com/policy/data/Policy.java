@@ -4,7 +4,9 @@
 
 package com.policy.data;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Policy {
 	private int policy_id;
@@ -15,9 +17,10 @@ public class Policy {
 	private double sum_assured;
 	private String pre_reqs;
 	private int payments_per_year; // Added by Patrick Yu on Aug 16, 2018
-	private double premiumAmount;
-	private Date start_date;
-	private int agent_id;
+	private double premiumAmount; // Added by Patrick Yu on Aug 16, 2018
+	private Date start_date; // Added by Patrick Yu on Aug 16, 2018
+	private int agent_id; // Added by Patrick Yu on Aug 16, 2018
+	private List<Nominee> nominees = new ArrayList<Nominee>(); // Added by Patrick Yu on Aug 16, 2018
 	
 	public int getPolicyId() {
 		return policy_id;
@@ -115,5 +118,17 @@ public class Policy {
 	// Added by Patrick Yu on Aug 16, 2018
 	public void setStartDate(Date start_date) {
 		this.start_date = start_date;
+	}
+
+	// Added by Patrick Yu on Aug 16, 2018
+	public List<Nominee> getNominees() {
+		return nominees;
+	}
+
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setNominees(List<Nominee> myNominees) {
+		for(Nominee n : myNominees) {
+			this.nominees.add(n);
+		}
 	}
 }
