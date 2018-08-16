@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1,Unicode #8896 / U+22C1 " pageEncoding="ISO-8859-1"%>
+<%@ page import="com.policy.data.Manager" %>
 <!DOCTYPE html> <!-- created by Hamza at 3pm   -->
 <html>
 <head>
@@ -9,7 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Create New Policy</title>
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -101,6 +102,8 @@
 	</SCRIPT>
 </head>
 <body>
+<% Manager m = (Manager) session.getAttribute("user"); %>
+<h1>Admin <%= m.getFullname() %></h1>
 <div class="container">
   <div  id="form_style" >
   <form id="CreateFormUI" method= "post" action ="MainServlet" ">

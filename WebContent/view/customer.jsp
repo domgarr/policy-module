@@ -20,6 +20,7 @@
 	</tr>
 	<tr>
 		<td><button type="button" onclick="window.location.href = 'PolicyDetails.jsp';" value="policyDetails">View Policy Details</button></td>
+		<td></td>
 	</tr>
 	</table>
 </body>

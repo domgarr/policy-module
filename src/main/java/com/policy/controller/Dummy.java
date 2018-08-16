@@ -21,14 +21,17 @@ import com.policy.data.Manager;
 @WebServlet("/login")
 public class Dummy extends HttpServlet {
 	
-	
+	public static void logout(HttpSession s) {
+		s.invalidate();
+		System.out.println("HERE LOGOUT");
+	}
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		String uname = req.getParameter("username");
 		String password = req.getParameter("password");
 		HttpSession session = req.getSession(true);
 		if(uname.equals(password) && uname.equals("admin")) {
 			Manager a = new Manager();
-			a.setFullname("Amr");
+			a.setFullname("Amr El-Naggar");
 			a.setManagerId(101);
 			session.setAttribute("user", a);
 			res.sendRedirect("view/admin.jsp");
