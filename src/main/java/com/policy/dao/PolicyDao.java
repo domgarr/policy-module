@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.policy.data.Policy;
 
@@ -54,6 +55,34 @@ public class PolicyDao {
 				System.out.println("Policy was not added");
 				return false;
 			}
+	}
+	
+	private Policy getPolicyInformation(ResultSet rs) {
+		Policy p = new Policy();
+		
+		return p;
+	}
+	
+	
+	public ArrayList<Policy> getPoliciesByCustomerID(int id) throws ClassNotFoundException, SQLException{
+		ArrayList<Policy> policies = new ArrayList<Policy>();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		con = OracleConnection.INSTANCE.getConnection();
+		String query = "SELECT *\r\n" + 
+				"FROM PolicyMap\r\n" + 
+				"LEFT JOIN Policies\r\n" + 
+				"ON PolicyMap.policy_id=Policy.policy_id\r\n" + 
+				"Where PolicyMap.customer_id =" + id + ";";
+		ps = con.prepareStatement(query);
+		rs = ps.executeQuery();
+		
+		while(rs.next()){
+			policies.add(getPolicyInformation(rs));
+		}
+		return policies;
 	}
 	
 	/**

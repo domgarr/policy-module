@@ -12,6 +12,10 @@ public class Policy {
 	private double tenure;
 	private double sum_assured;
 	private String pre_reqs;
+	private double premiumAmount;
+	private boolean isActive;
+	private int agentID;
+	
 	
 	public int getPolicyId() {
 		return policy_id;
@@ -70,5 +74,35 @@ public class Policy {
 
 	public void setPreReqs(String preReqs) {
 		this.pre_reqs = preReqs;
+	}
+
+
+	public int getAgentID() {
+		return agentID;
+	}
+
+
+	public void setAgentID(int agentID) {
+		this.agentID = agentID;
+	}
+
+
+	public double getPremiumAmount() {
+		return premiumAmount;
+	}
+
+
+	public void setPremiumAmount(double premiumAmount) {
+		this.premiumAmount = premiumAmount;
+	}
+
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 }
