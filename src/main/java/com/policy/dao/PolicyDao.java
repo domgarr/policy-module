@@ -116,8 +116,16 @@ public class PolicyDao {
 		
 		return maxID;
 }
-	
-	public boolean update(Policy policy) throws SQLException, ClassNotFoundException {
+	/**
+	 * Added by Domenic Garreffa on Aug 16, 2018
+	 * 
+	 * Updates existing Policy where ID matches method paramter.
+	 * @param policy
+	 * @return True if Policy table was affected. IE. Policy was altered succesfully and false otherwise.
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public boolean update(Policy policy, int policyID) throws SQLException, ClassNotFoundException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -132,7 +140,7 @@ public class PolicyDao {
 		ps.setDouble(5, policy.getMinSum());
 		ps.setDouble(6, policy.getMaxSum());
 		ps.setString(7, policy.getPreReqs());
-		ps.setInt(8, policy.getPolicyId());
+		ps.setInt(8, policyID);
 
 		int rowsAffected = ps.executeUpdate();
 		

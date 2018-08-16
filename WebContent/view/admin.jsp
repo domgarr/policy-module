@@ -14,8 +14,11 @@
 		<th>Policy Management</th>
 	</tr>
 	
+	<!-- 
+	Changed href from RegisterPolicy to CreatePolicy.
+	Updated by Domenic Garreffa on Aug 16, 2018. -->
 	<tr>
-		<td><button type="button" onclick="window.location.href = 'CreatePolicy.jsp';" value="newPolicy">Create Policy</button></td>
+		<td><button type="button" onclick="window.location.href = 'RegisterPolicy.jsp';" value="newPolicy">Create Policy</button></td>
 	</tr>
 	<tr>
 		<td><button type="button" onclick="window.location.href = 'UpdatePolicy.jsp';" value="updatePolicy">Update Policy</button></td>

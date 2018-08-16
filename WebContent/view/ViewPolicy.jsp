@@ -1,3 +1,5 @@
+<!--  Created by Domenic Garreffa on Aug 16-->
+
 <%@ page import="com.policy.data.Policy"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -28,14 +30,13 @@
 		  <p> Number of Nominees: <%= policy.getNumberNominees()  %></p>
 		  <p> Tenure: <%= policy.getTenure()  %> years  </p>
 		  <p> Sum Assured: $<%= policy.getMinSum() %> - $<%= policy.getMaxSum() %> </p>
+		  
+		  <!-- Add new line in between each pre-requisite -->
 		  <p> Pre-Requisites: <%= policy.getPreReqs() %> </p>
 		   
-		  <a class="btn btn-primary btn-lg" href="#" role="button" onclick="<%= (new com.policy.controller.ViewPolicyController()).onBackPress(session, response) %>
-				">Back</a>
-		
-		
-			
-		
+		  <form method = "get" action="../MainServlet">
+		  <button class="btn btn-primary btn-lg" type = "submit" name="action" value="viewPolicyBackButton"> Back </button>		  
+		  </form>
 		</div>
 	</div>
 		
