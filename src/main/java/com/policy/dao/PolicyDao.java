@@ -38,7 +38,7 @@ import com.policy.data.Policy;
 public class PolicyDao {
 
 	private final String tableName = "Policies";
-	private final String INSERT_INTO_POLICY = "insert into " + tableName + "values(?,?,?,?,?,?,?,?)";
+	private final String INSERT_INTO_POLICY = "insert into " + tableName + " values(?,?,?,?,?,?,?,?)";
 
 	private final String SELECT_MAX_ID = "select MAX(policy_id) from " + tableName;
 	private final String UPDATE_POLICY = "UPDATE Policies" +
