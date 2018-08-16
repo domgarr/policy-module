@@ -106,17 +106,7 @@
 		   else if(!checkTenure.match(/^\d+$/)){
 			   document.getElementById("area").value = checkTenure.substring(0,checkTenure.length-1);
 		   }
-		   else if(checkMin[0].charAt('0')&&checkMin[1].charAt(!'0'))//exist
-			   try {
-				   int i = Integer.parseInt(yourString);
-				   System.out.println(i);
-				} catch(NumberFormatException e) {
-				   // the string is not a number
-				}
-	  	   
-	       else if(checkMax[0].charAt('0')&&checkMax[1].charAt('0'))//exist
-	    		document.getElementById("max").value = checkMax.substring(0,i.length-1)
-	   }
+
 	   
 	   function getPar(){
 		   var polName = document.forms["CreateFormUI"]["policy_name"].value;
