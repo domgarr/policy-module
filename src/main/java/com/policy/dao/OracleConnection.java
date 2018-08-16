@@ -59,5 +59,4 @@ public enum OracleConnection {
 			con.close();
 		} catch (SQLException e) {}
 	}
-
 }
