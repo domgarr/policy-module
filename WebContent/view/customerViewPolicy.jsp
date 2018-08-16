@@ -36,8 +36,7 @@
 	int policyId = myPolicy.getPolicyId();
 	String policyName = myPolicy.getPolicyName();
 	double policyTenure = myPolicy.getTenure();
-	//String sumAssured = "$" + (int)myPolicy.getMinSum() + " to $" + (int)myPolicy.getMaxSum();
-	String sumAssured = "12345";
+	String sumAssured = "$" + (int)myPolicy.getMinSum() + " to $" + (int)myPolicy.getMaxSum();
 	List<Nominee> policyNominees = myPolicy.getNominees();
 	int paymentsPerYear = myPolicy.getPaymentsPerYear();
 	String premiumType;
