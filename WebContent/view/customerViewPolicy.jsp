@@ -10,7 +10,22 @@
 	Policy policy = new Policy();
 	policy.setPolicyId(1);
 	policy.setPolicyName("Tom cat");
-	policy.setTenure(1.5);
+	policy.setTenure(1.1);
+	policy.setSumAssured(10200.50);
+	policy.setPaymentsPerYear(2);
+	policy.setPremiumAmonut(2500);
+	policy.setStartDate(new Date());
+	
+	// Nominee data
+	List<Nominee> myNominees = new ArrayList<Nominee>();
+	myNominees.add(new Nominee());
+	myNominees.add(new Nominee());
+	myNominees.add(new Nominee());
+	myNominees.get(0).setNomineeName("Nominee A");
+	myNominees.get(1).setNomineeName("Nominee B");
+	myNominees.get(2).setNomineeName("Nominee C");
+	policy.setNominees(myNominees);
+	policy.setNumberNominees(myNominees.size());
 	
 	// Dummy session object
 	session.setAttribute("policy", policy);
@@ -21,6 +36,7 @@
 	String policyName = myPolicy.getPolicyName();
 	double policyTenure = myPolicy.getTenure();
 	double sumAssured = myPolicy.getSumAssured();
+	List<Nominee> policyNominees = myPolicy.getNominees();
 	int paymentsPerYear = myPolicy.getPaymentsPerYear();
 	String premiumType;
 	if(paymentsPerYear == 1) {
@@ -37,24 +53,12 @@
 	
 	// convert startDate to expireDate
 	Date startDate = myPolicy.getStartDate();
-	
-	Calendar date = Calendar.getInstance();
-    date.setTime(startDate);
-    Format f = new SimpleDateFormat("dd-MMMM-yyyy");
-    String policyStartDate = f.format(date.getTime());
-    System.out.println(policyStartDate);
-    date.add(Calendar.YEAR,1);
-    String policyExpireDate = f.format(date.getTime());
-    System.out.println(policyExpireDate);
-	
-	// Nominee data
-	List<Nominee> myNominees = new ArrayList<Nominee>();
-	myNominees.add(new Nominee());
-	myNominees.add(new Nominee());
-	myNominees.add(new Nominee());
-	myNominees.get(0).setNomineeName("Nominee A");
-	myNominees.get(1).setNomineeName("Nominee B");
-	myNominees.get(2).setNomineeName("Nominee C");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Calendar cal = Calendar.getInstance();
+	cal.setTime(startDate);
+	cal.add(Calendar.YEAR, (int)policyTenure);
+	cal.add(Calendar.MONTH, (int)((policyTenure-(int)policyTenure)*10));
+	String expireDate = sdf.format(cal.getTime());
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -120,7 +124,7 @@ button {
 			%>
 			<tr>
 				<td class="tbl-labels">Nominee</td>
-				<td class="tbl-data"><%= myNominees.get(i).getNomineeName() %></td>
+				<td class="tbl-data"><%= policyNominees.get(i).getNomineeName() %></td>
 			</tr>
 			<%
 				}
@@ -131,7 +135,7 @@ button {
 			</tr>
 			<tr>
 				<td class="tbl-labels">Policy Expire Date</td>
-				<td class="tbl-data"></td>
+				<td class="tbl-data"><%= expireDate %></td>
 			</tr>
 		</table>
 		<button id="update-nominees">Update Nominees</button>
