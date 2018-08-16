@@ -1,8 +1,10 @@
 <%@ page import="com.policy.data.Policy" %>
 <%@ page import="java.io.IOException" %>
-
 <%@ page import="com.policy.service.PolicyService" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1,Unicode #8896 / U+22C1 " pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*,java.util.*" %>
+
+
 <!DOCTYPE html> <!-- created by Hamza at 3pm   -->
 <html>
 <head>
@@ -33,6 +35,8 @@
 	    	else if(i<0){
 	    		document.getElementById("display").value=0;
 	    	}
+	    	else if(i[0].charAt('0')&&i[1].charAt('0'))//exist
+	    		document.getElementById("display").value = i.substring(0,i.length-2)
 	    }
 	    </script>
 	    
@@ -101,8 +105,17 @@
 		   }
 		   else if(!checkTenure.match(/^\d+$/)){
 			   document.getElementById("area").value = checkTenure.substring(0,checkTenure.length-1);
-
 		   }
+		   else if(checkMin[0].charAt('0')&&checkMin[1].charAt(!'0'))//exist
+			   try {
+				   int i = Integer.parseInt(yourString);
+				   System.out.println(i);
+				} catch(NumberFormatException e) {
+				   // the string is not a number
+				}
+	  	   
+	       else if(checkMax[0].charAt('0')&&checkMax[1].charAt('0'))//exist
+	    		document.getElementById("max").value = checkMax.substring(0,i.length-1)
 	   }
 	   
 	   function getPar(){
@@ -146,10 +159,16 @@
 				<td>   <button type="reset" value="Reset">Reset form</button> </td>
 				
 			</tr>
-				<div>
 				
+				
+			
 			<tr>
-					
+				<td> Type of Insurance </td>
+				<td> <input type="text" name="policyType" required = "required" pattern="([^\s][A-z0-9\s]+){2,100}"/> </td>
+				
+			</tr>
+				
+			<tr>	
 				<td> Number of Nominee's </td>
 				<td>
 						
@@ -159,7 +178,6 @@
 				</td> 
 			</tr>
 
-    			</div>
     			<tr> 
 	    			<td> Tenure </td>
 	    			<td> <br>

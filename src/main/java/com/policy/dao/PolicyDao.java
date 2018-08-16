@@ -36,8 +36,10 @@ import com.policy.data.Policy;
  */
 
 public class PolicyDao {
-	private final String tableName = "Policies_dom";
-	private final String INSERT_INTO_POLICY = "insert into " + tableName + " values(?,?,?,?,?,?,?)";
+
+	private final String tableName = "Policies";
+	private final String INSERT_INTO_POLICY = "insert into " + tableName + "values(?,?,?,?,?,?,?,?)";
+
 	private final String SELECT_MAX_ID = "select MAX(policy_id) from " + tableName;
 	private final String UPDATE_POLICY = "UPDATE Policies" +
 			"SET policy_type = ?, "+
@@ -70,14 +72,15 @@ public class PolicyDao {
 			ps.setString(3, policy.getPolicyName());
 			ps.setInt(4, policy.getNumberNominees());
 			ps.setDouble(5, policy.getTenure());
-			ps.setDouble(6, policy.getSumAssured());
-			ps.setString(7, policy.getPreReqs());
+			ps.setDouble(6, policy.getMinSum());
+			ps.setDouble(7, policy.getMaxSum());
+			ps.setString(8, policy.getPreReqs());
 
 			int rowsAffected = ps.executeUpdate();
 			
 			//clean up
 			ps.close();
-			con.close();
+			OracleConnection.INSTANCE.disconnect();
 				
 			if(rowsAffected >= 1) {
 				System.out.println("Policy successfully added");
@@ -109,8 +112,8 @@ public class PolicyDao {
 		//clean up
 		rs.close();
 		ps.close();
-		con.close();
-
+		OracleConnection.INSTANCE.disconnect();
+		
 		return maxID;
 }
 	
@@ -126,8 +129,8 @@ public class PolicyDao {
 		ps.setString(2, policy.getPolicyName());
 		ps.setInt(3, policy.getNumberNominees());
 		ps.setDouble(4, policy.getTenure());
-		ps.setDouble(5, policy.getMinSumAssured());
-		ps.setDouble(6, policy.getMinSumAssured());
+		ps.setDouble(5, policy.getMinSum());
+		ps.setDouble(6, policy.getMaxSum());
 		ps.setString(7, policy.getPreReqs());
 		ps.setInt(8, policy.getPolicyId());
 
@@ -138,10 +141,10 @@ public class PolicyDao {
 		con.close();
 			
 		if(rowsAffected >= 1) {
-			System.out.println("Policy successfully added");
+			System.out.println("Policy successfully updated");
 			return true;
 		}else {
-			System.out.println("Policy was not added");
+			System.out.println("Policy was not updated.");
 			return false;
 		}
 }
