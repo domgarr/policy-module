@@ -2,6 +2,7 @@ package com.policy.controller;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
@@ -35,11 +36,17 @@ public class MainServlet extends HttpServlet {
 				request.getSession().removeAttribute("policy");
 				response.sendRedirect("view/admin.jsp");
 				break;
+			case "viewPolicy":
+				ArrayList<Policy> policies = (ArrayList<Policy>)request.getSession().getAttribute("policies");
+				System.out.println("WTF" + request.getParameter("policy") + " po: " + policies.size() );
+				request.getSession().setAttribute("policy", policies.get(Integer.parseInt(request.getParameter("policy"))));
+				response.sendRedirect("view/customerViewPolicy.jsp");
+				break;
 			case "viewDeletePolicySelectPolicy":
 				String nameAndID = request.getParameter("selectPolicy");
 				
 				
-				System.out.println(ID);
+				//System.out.println(ID);
 				//HttpSession ses = request.getSession();
 				
 				//Policy policy = new PolicyService().getPolicyById(ID);

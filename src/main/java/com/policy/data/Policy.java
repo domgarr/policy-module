@@ -22,7 +22,7 @@ public class Policy {
 	private Date start_date; // Added by Patrick Yu on Aug 16, 2018
 	private int agent_id; // Added by Patrick Yu on Aug 16, 2018
 	private List<Nominee> nominees = new ArrayList<Nominee>(); // Added by Patrick Yu on Aug 16, 2018
-	
+
 	public int getPolicyId() {
 		return policy_id;
 	}

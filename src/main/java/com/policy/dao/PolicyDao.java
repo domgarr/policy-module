@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-
 import java.util.ArrayList;
 
 import com.policy.data.Policy;
@@ -93,6 +92,43 @@ public class PolicyDao {
 			}
 	}
 	
+	private Policy getPolicyInformation(ResultSet rs) throws SQLException {
+		Policy p = new Policy();
+		p.setPolicyId(rs.getInt("policy_id"));
+		p.setPolicyName(rs.getString("policy_name"));
+		p.setTenure(rs.getDouble("tenure"));
+		p.setMinSum(rs.getDouble("sum_assured_min"));
+		p.setMaxSum(rs.getDouble("sum_assured_max"));
+		p.setPaymentsPerYear(rs.getInt("payments_per_year"));
+		p.setPremiumAmonut(rs.getDouble("premium_amount"));
+		return p;
+	}
+	
+	
+	public ArrayList<Policy> getPoliciesByCustomerID(int id) throws ClassNotFoundException, SQLException{
+		ArrayList<Policy> policies = new ArrayList<Policy>();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		con = OracleConnection.INSTANCE.getConnection();
+		String query = "SELECT *\r\n" + 
+				"FROM PolicyMap\r\n" + 
+				"LEFT JOIN Policies\r\n" + 
+				"ON PolicyMap.policy_id=Policy.policy_id\r\n" + 
+				"Where PolicyMap.customer_id =" + id + ";";
+		ps = con.prepareStatement(query);
+		rs = ps.executeQuery();
+		
+		while(rs.next()){
+			policies.add(getPolicyInformation(rs));
+		}
+		rs.close();
+		ps.close();
+		OracleConnection.INSTANCE.disconnect();
+		return policies;
+	}
+	
 	/**
 	 * 
 	 * @return An integer holding the largest ID currently in the table.
@@ -173,7 +209,6 @@ public class PolicyDao {
 	public static List<Policy> getAllPolicies () throws SQLException, ClassNotFoundException {
 		Connection con = OracleConnection.INSTANCE.getConnection();
 		Statement st = con.createStatement();
-		
 		ResultSet rs = st.executeQuery("Select * from Policies");
 		
 		
@@ -198,7 +233,7 @@ public class PolicyDao {
 		return k;
 		
 	}
-	
+
 	/**
 	 * Method used by Admin to generate certificates. It uses customer and 
 	 * policy ID to find a PolicyMap. It then stores the ID of that policy map

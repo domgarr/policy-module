@@ -8,6 +8,8 @@
 <%@ page import="com.policy.dao.PolicyMapDao" %>
 <%
 	// Dummy policy data	
+
+	/*
 	Policy policy = new Policy();
 	policy.setPolicyId(1);
 	policy.setPolicyName("Tom cat");
@@ -31,6 +33,7 @@
 	
 	// Dummy session object
 	session.setAttribute("policy", policy);
+*/
 	Policy myPolicy = (Policy)session.getAttribute("policy");
 	
 	// Get values from the session object
@@ -38,7 +41,7 @@
 	String policyName = myPolicy.getPolicyName();
 	double policyTenure = myPolicy.getTenure();
 	String sumAssured = "$" + (int)myPolicy.getMinSum() + " to $" + (int)myPolicy.getMaxSum();
-	//List<Nominee> policyNominees = myPolicy.getNominees();
+	List<Nominee> policyNominees = myPolicy.getNominees();
 	int paymentsPerYear = myPolicy.getPaymentsPerYear();
 	String premiumType;
 	if(paymentsPerYear == 1) {
@@ -122,7 +125,7 @@ button {
 				<td class="tbl-data">$<%= premiumAmount %></td>
 			</tr>
 			<%
-				for (int i = 0; i < myNominees.size(); i++) {
+				for (int i = 0; i < policyNominees.size(); i++) {
 			%>
 			<tr>
 				<td class="tbl-labels">Nominee</td>
