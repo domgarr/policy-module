@@ -26,6 +26,8 @@ public class MainServlet extends HttpServlet {
 		 * Updated by Domenic Garreffa on Aug 16, 2018
 		 */
 		String action = request.getParameter("action");
+		
+		System.out.println(action);
 		if(action != null) {
 			switch(action) {
 			case "viewPolicyBackButton": 
@@ -38,44 +40,31 @@ public class MainServlet extends HttpServlet {
 				request.getSession().setAttribute("policy", policies.get(Integer.parseInt(request.getParameter("policy"))));
 				response.sendRedirect("view/customerViewPolicy.jsp");
 				break;
-		}
+			case "viewDeletePolicySelectPolicy":
+				System.out.println("HERE");
+				String nameAndID = request.getParameter("selectPolicy");
+				System.out.println(nameAndID);
+				//HttpSession ses = request.getSession();
+				
+				//Policy policy = new PolicyService().getPolicyById(ID);
+				//ses.setAttribute("policy", policy );
+				
+			}
 			return;
 		}
 		
 		// TODO Auto-generated method stub
 		HttpSession hses = request.getSession(true);
 		
-		//SERVLET WILL SEND AGENT ID CALLING A FUNCTION OF A CLASS AND RETURN A STRING OF CUSTIDS.
 		response.setContentType("text/html");
+
+		String agentid = (String) hses.getAttribute("agentid");
+		String custid = (String) hses.getAttribute("cust");
+		String policyid = (String) hses.getAttribute("policy");
 		
-		if (request.getParameter("SearchCust")!=null) {
-			String[] array = {"1","2","3","4","5"}; //RETRIEVE CUSTOMER ARRAY
-			
-			String agentid = request.getParameter("agent");
-			if (agentid!=null) {
-				hses.setAttribute("agentid", agentid);
-			}else {
-				hses.setAttribute("agentid", " ");
-			}
-			hses.setAttribute("custid", array);
-			getServletContext().getRequestDispatcher("/ViewPolicyByAgent.jsp").forward(request, response);
-		}else if (request.getParameter("SearchPolicy")!=null) {
-			
-			String[] array = {}; //RETRIEVE POLICY ARRAY
-			
-			String custid = request.getParameter("custid");
-			hses.setAttribute("cust", custid);
-			hses.setAttribute("policyid", array);
-			getServletContext().getRequestDispatcher("/ViewPolicyByAgent.jsp").forward(request, response);
-		}else if (request.getParameter("view")!=null) { //AFTER CLICKING VIEW POLICIES.
-			String policyid = request.getParameter("policyid");
-			hses.setAttribute("policyid", policyid);
-			String agentid = (String) hses.getAttribute("agentid");
-			String custid = (String) hses.getAttribute("cust");
-			System.out.println(agentid);
-			System.out.println(custid);
-			System.out.println(policyid);
-		}	
+		PolicyMapDao obj = new PolicyMapDao(agentid, custid, policyid);
+		
+		response.sendRedirect("view/customerViewPolicy.jsp");
 	}
   
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

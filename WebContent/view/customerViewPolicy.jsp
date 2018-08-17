@@ -5,6 +5,7 @@
 <%@ page import="com.policy.data.Policy"%>
 <%@ page import="java.text.Format"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="com.policy.dao.PolicyMapDao" %>
 <%
 	// Dummy policy data	
 
@@ -150,7 +151,7 @@ button {
 		// When clicked, redirect page to "updateNominees.jsp"
 		document.getElementById("update-nominees").addEventListener("click",
 				function() {
-					window.location.href = "updateNominee.jsp";
+					window.location.href = "view/updateNominee.jsp";
 				});
 
 		// Button click event listener for go back button;
