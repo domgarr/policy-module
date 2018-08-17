@@ -23,11 +23,7 @@
 	Changed href from RegisterPolicy to CreatePolicy.
 	Updated by Domenic Garreffa on Aug 16, 2018. -->
 	<tr>
-<<<<<<< HEAD
-		<td><button type="button" onclick="window.location.href = 'CreateForm.jsp';" value="newPolicy">Create Policy</button></td>
-=======
 		<td><button type="button" onclick="window.location.href = 'RegisterPolicy.jsp';" value="newPolicy">Create Policy</button></td>
->>>>>>> 8e22a9f50197f62a6bee7ff70953773bd0eb6038
 	</tr>
 	<tr>
 		<td><button type="button" onclick="window.location.href = 'UpdatePolicy.jsp';" value="updatePolicy">Update Policy</button></td>
@@ -36,7 +32,7 @@
 		<td><button type="button" onclick="window.location.href = 'DeletePolicy.jsp';" value="DeletePolicy">Delete Policy</button></td>
 	</tr>
 	<tr>
-		<td><form action="/PolicyModule/logout" mehtod="post"><input type="submit" name="logout" value="logout"></form></td>
+		<td><button type="button" onclick="window.location.href = 'ViewPolicyByAgent.jsp';" value="DeletePolicy">View Policy</button></td>
 	</tr>
 	</table>
 </body>
