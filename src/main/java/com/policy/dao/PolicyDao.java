@@ -54,7 +54,6 @@ public class PolicyDao {
 			"pre_reqs = ? " +
 			"WHERE policy_id = ? ";
 	
-	
 	/**
 	 *  Will insert a policy object into the database.
 	 * @param policy - an instantiated Policy object.
@@ -158,7 +157,7 @@ public class PolicyDao {
 			System.out.println("Policy was not updated.");
 			return false;
 		}
-}
+	}
 	
 	/**
 	 * Method to return a List of Policies. The list will simply contain every policy
@@ -174,7 +173,6 @@ public class PolicyDao {
 	public static List<Policy> getAllPolicies () throws SQLException, ClassNotFoundException {
 		Connection con = OracleConnection.INSTANCE.getConnection();
 		Statement st = con.createStatement();
-
 		
 		ResultSet rs = st.executeQuery("Select * from Policies");
 		
