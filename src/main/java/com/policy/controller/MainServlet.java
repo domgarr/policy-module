@@ -2,7 +2,7 @@ package com.policy.controller;
 
 
 import java.io.IOException;
-
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,9 +35,10 @@ public class MainServlet extends HttpServlet {
 				response.sendRedirect("view/admin.jsp");
 				break;
 			case "viewDeletePolicySelectPolicy":
-				System.out.println("HERE");
 				String nameAndID = request.getParameter("selectPolicy");
-				System.out.println(nameAndID);
+				
+				
+				System.out.println(ID);
 				//HttpSession ses = request.getSession();
 				
 				//Policy policy = new PolicyService().getPolicyById(ID);

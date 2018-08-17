@@ -26,6 +26,10 @@
 	<tr>
 		<td><button type="button" onclick="window.location.href = 'DeletePolicy.jsp';" value="DeletePolicy">Delete Policy</button></td>
 	</tr>
+	<tr>
+		<td><button type="button" onclick="window.location.href = 'ViewPolicyByAgent.jsp';" value="DeletePolicy">View Policy</button></td>
+	</tr>
+	
 	</table>
 </body>
 </html>
