@@ -25,6 +25,7 @@ public class MainServlet extends HttpServlet {
 		
 		//SERVLET WILL SEND AGENT ID CALLING A FUNCTION OF A CLASS AND RETURN A STRING OF CUSTIDS.
 		response.setContentType("text/html");
+		
 		if (request.getParameter("SearchCust")!=null) {
 			String[] array = {"1","2","3","4","5"}; //RETRIEVE CUSTOMER ARRAY
 			

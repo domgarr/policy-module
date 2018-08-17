@@ -41,6 +41,7 @@ public class Dummy extends HttpServlet {
 			u.setFirstname("Ross");
 			u.setLastname("Geller");
 			u.setCustomerId(200);
+			session.setAttribute("user", u);
 			res.sendRedirect("view/customer.jsp");
 		}
 		else {

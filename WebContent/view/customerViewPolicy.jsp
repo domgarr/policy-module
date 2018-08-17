@@ -7,29 +7,8 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%
 	// Dummy policy data	
-	Policy policy = new Policy();
-	policy.setPolicyId(1);
-	policy.setPolicyName("Tom cat");
-	policy.setTenure(1.1);
-	policy.setMinSum(100.50);
-	policy.setMaxSum(1000000.50);
-	policy.setPaymentsPerYear(2);
-	policy.setPremiumAmonut(2500);
-	policy.setStartDate(new Date());
-	
-	// Nominee data
-	List<Nominee> myNominees = new ArrayList<Nominee>();
-	myNominees.add(new Nominee());
-	myNominees.add(new Nominee());
-	myNominees.add(new Nominee());
-	myNominees.get(0).setNomineeName("Nominee A");
-	myNominees.get(1).setNomineeName("Nominee B");
-	myNominees.get(2).setNomineeName("Nominee C");
-	policy.setNominees(myNominees);
-	policy.setNumberNominees(myNominees.size());
-	
-	// Dummy session object
-	session.setAttribute("policy", policy);
+	ArrayList<Policy> policies = (ArrayList<Policy>)request.getAttribute("policies");
+	session.setAttribute("policy", policies.get(Integer.parseInt(request.getParameter("policy"))));
 	Policy myPolicy = (Policy)session.getAttribute("policy");
 	
 	// Get values from the session object
@@ -121,7 +100,7 @@ button {
 				<td class="tbl-data">$<%= premiumAmount %></td>
 			</tr>
 			<%
-				for (int i = 0; i < myNominees.size(); i++) {
+				for (int i = 0; i < policyNominees.size(); i++) {
 			%>
 			<tr>
 				<td class="tbl-labels">Nominee</td>

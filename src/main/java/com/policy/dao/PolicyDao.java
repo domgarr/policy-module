@@ -92,9 +92,15 @@ public class PolicyDao {
 			}
 	}
 	
-	private Policy getPolicyInformation(ResultSet rs) {
+	private Policy getPolicyInformation(ResultSet rs) throws SQLException {
 		Policy p = new Policy();
-		
+		p.setPolicyId(rs.getInt("policy_id"));
+		p.setPolicyName(rs.getString("policy_name"));
+		p.setTenure(rs.getDouble("tenure"));
+		p.setMinSum(rs.getDouble("sum_assured_min"));
+		p.setMaxSum(rs.getDouble("sum_assured_max"));
+		p.setPaymentsPerYear(rs.getInt("payments_per_year"));
+		p.setPremiumAmonut(rs.getDouble("premium_amount"));
 		return p;
 	}
 	
@@ -117,6 +123,9 @@ public class PolicyDao {
 		while(rs.next()){
 			policies.add(getPolicyInformation(rs));
 		}
+		rs.close();
+		ps.close();
+		OracleConnection.INSTANCE.disconnect();
 		return policies;
 	}
 	
