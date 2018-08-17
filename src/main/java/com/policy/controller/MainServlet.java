@@ -26,13 +26,24 @@ public class MainServlet extends HttpServlet {
 		 * Updated by Domenic Garreffa on Aug 16, 2018
 		 */
 		String action = request.getParameter("action");
+		
+		System.out.println(action);
 		if(action != null) {
 			switch(action) {
 			case "viewPolicyBackButton": 
 				request.getSession().removeAttribute("policy");
 				response.sendRedirect("view/admin.jsp");
 				break;
-		}
+			case "viewDeletePolicySelectPolicy":
+				System.out.println("HERE");
+				String nameAndID = request.getParameter("selectPolicy");
+				System.out.println(nameAndID);
+				//HttpSession ses = request.getSession();
+				
+				//Policy policy = new PolicyService().getPolicyById(ID);
+				//ses.setAttribute("policy", policy );
+				
+			}
 			return;
 		}
 		
