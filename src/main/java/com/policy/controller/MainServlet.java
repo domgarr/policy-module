@@ -2,7 +2,8 @@ package com.policy.controller;
 
 
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.policy.dao.PolicyMapDao;
 import com.policy.data.Policy;
 import com.policy.service.PolicyService;
 
@@ -20,39 +22,52 @@ import com.policy.service.PolicyService;
 @WebServlet("/MainServlet")
 public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		 * Use this to differentiate multiple submit buttons in a single form
+		 * 
+		 * Updated by Domenic Garreffa on Aug 16, 2018
+		 */
+		String action = request.getParameter("action");
+		
+		System.out.println(action);
+		if(action != null) {
+			switch(action) {
+			case "viewPolicyBackButton": 
+				request.getSession().removeAttribute("policy");
+				response.sendRedirect("view/admin.jsp");
+				break;
+			case "viewPolicy":
+				ArrayList<Policy> policies = (ArrayList<Policy>)request.getSession().getAttribute("policies");
+				System.out.println("WTF" + request.getParameter("policy") + " po: " + policies.size() );
+				request.getSession().setAttribute("policy", policies.get(Integer.parseInt(request.getParameter("policy"))));
+				response.sendRedirect("view/customerViewPolicy.jsp");
+				break;
+			case "viewDeletePolicySelectPolicy":
+				String nameAndID = request.getParameter("selectPolicy");
+				
+				
+				//System.out.println(ID);
+				//HttpSession ses = request.getSession();
+				
+				//Policy policy = new PolicyService().getPolicyById(ID);
+				//ses.setAttribute("policy", policy );
+				
+			}
+			return;
+		}
+		
 		// TODO Auto-generated method stub
 		HttpSession hses = request.getSession(true);
 		
-		//SERVLET WILL SEND AGENT ID CALLING A FUNCTION OF A CLASS AND RETURN A STRING OF CUSTIDS.
 		response.setContentType("text/html");
-		if (request.getParameter("SearchCust")!=null) {
-			String[] array = {"1","2","3","4","5"}; //RETRIEVE CUSTOMER ARRAY
-			
-			String agentid = request.getParameter("agent");
-			if (agentid!=null) {
-				hses.setAttribute("agentid", agentid);
-			}else {
-				hses.setAttribute("agentid", " ");
-			}
-			hses.setAttribute("custid", array);
-			getServletContext().getRequestDispatcher("/ViewPolicyByAgent.jsp").forward(request, response);
-		}else if (request.getParameter("SearchPolicy")!=null) {
-			
-			String[] array = {}; //RETRIEVE POLICY ARRAY
-			
-			String custid = request.getParameter("custid");
-			hses.setAttribute("cust", custid);
-			hses.setAttribute("policyid", array);
-			getServletContext().getRequestDispatcher("/ViewPolicyByAgent.jsp").forward(request, response);
-		}else if (request.getParameter("view")!=null) { //AFTER CLICKING VIEW POLICIES.
-			String policyid = request.getParameter("policyid");
-			hses.setAttribute("policyid", policyid);
-			String agentid = (String) hses.getAttribute("agentid");
-			String custid = (String) hses.getAttribute("cust");
-			System.out.println(agentid);
-			System.out.println(custid);
-			System.out.println(policyid);
-		}	
+
+		String agentid = (String) hses.getAttribute("agentid");
+		String custid = (String) hses.getAttribute("cust");
+		String policyid = (String) hses.getAttribute("policy");
+		
+		PolicyMapDao obj = new PolicyMapDao(agentid, custid, policyid);
+		
+		response.sendRedirect("view/customerViewPolicy.jsp");
 	}
   
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
