@@ -8,6 +8,8 @@
 package com.policy.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import com.policy.dao.PolicyDao;
 import com.policy.data.Policy;
 
@@ -60,4 +62,35 @@ public class PolicyService {
 		}
 		return isInserted;
 	}
+	
+	public ArrayList<String> getAllPoliciesNameAndID() {
+		try {
+			
+			return policyDao.selectAllPolicyNameAndPolicyID();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("No policies exist");
+		return null;
+	}
+	
+	public Policy getPolicyById(int ID) {
+		try {
+			return policyDao.selectAllPolicyByID(ID);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 }

@@ -26,7 +26,7 @@
 	myNominees.get(0).setNomineeName("Nominee A");
 	myNominees.get(1).setNomineeName("Nominee B");
 	myNominees.get(2).setNomineeName("Nominee C");
-	policy.setNominees(myNominees);
+	//policy.setNominees(myNominees);
 	policy.setNumberNominees(myNominees.size());
 	
 	// Dummy session object
@@ -38,7 +38,7 @@
 	String policyName = myPolicy.getPolicyName();
 	double policyTenure = myPolicy.getTenure();
 	String sumAssured = "$" + (int)myPolicy.getMinSum() + " to $" + (int)myPolicy.getMaxSum();
-	List<Nominee> policyNominees = myPolicy.getNominees();
+	//List<Nominee> policyNominees = myPolicy.getNominees();
 	int paymentsPerYear = myPolicy.getPaymentsPerYear();
 	String premiumType;
 	if(paymentsPerYear == 1) {
@@ -126,14 +126,14 @@ button {
 			%>
 			<tr>
 				<td class="tbl-labels">Nominee</td>
-				<td class="tbl-data"><%= policyNominees.get(i).getNomineeName() %></td>
-			</tr>
+<%-- 				<td class="tbl-data"><%= policyNominees.get(i).getNomineeName() %></td>
+ --%>			</tr>
 			<%
 				}
 			%>
 			<tr>
 				<td class="tbl-labels">Sum Assured</td>
-				<td class="tbl-data">$<%= sumAssured %></td>
+				<td class="tbl-data"><%= sumAssured %></td>
 			</tr>
 			<tr>
 				<td class="tbl-labels">Policy Expire Date</td>
