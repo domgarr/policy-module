@@ -10,14 +10,14 @@ var nomineeForm = `
 		    <input type="text" class="form-control" id="name" >
 	 	</div>
 	</div>
-	<div class="col card-body"x>
+	<div class="col card-body">
 	 	<!-- Relationship -->
 	 	<div class="form-group">
 		   <label for="relationship">Select relationship</label>
 		   <select class="form-control" id="relationship" name="relationship">
-			    <option>Father</option>
-			    <option>Mother</option>
-		      	<option>Spouse</option>
+			    <option>Parent</option>
+			    <option>Spouse</option>
+		      	<option>Child</option>
 		   </select>
 		 </div>
 		 
@@ -29,7 +29,7 @@ var nomineeForm = `
 	   
 	   <!--  Name  -->
 	 	<div class="form-group">
-		    <label for="percentage">Enter a percentage between 0 and 100</label>
+		    <label for="percentage">Enter a percentage between 1 and 100</label>
 		    <input type="text" class="form-control" id="percentage" name="percentage" >
 	 	</div>
 	 	

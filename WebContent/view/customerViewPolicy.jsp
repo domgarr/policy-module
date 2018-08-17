@@ -25,10 +25,24 @@
 	myNominees.add(new Nominee());
 	myNominees.add(new Nominee());
 	myNominees.add(new Nominee());
+	myNominees.add(new Nominee());
+	myNominees.get(0).setNomineeId(0);
 	myNominees.get(0).setNomineeName("Nominee A");
+	myNominees.get(0).setRelationshipToCustomer("Parent");
+	myNominees.get(0).setPercentage(0.25);
+	myNominees.get(1).setNomineeId(1);
 	myNominees.get(1).setNomineeName("Nominee B");
+	myNominees.get(1).setRelationshipToCustomer("Spouse");
+	myNominees.get(1).setPercentage(0.25);
+	myNominees.get(2).setNomineeId(2);
 	myNominees.get(2).setNomineeName("Nominee C");
-	//policy.setNominees(myNominees);
+	myNominees.get(2).setRelationshipToCustomer("Child");
+	myNominees.get(2).setPercentage(0.25);
+	myNominees.get(3).setNomineeId(3);
+	myNominees.get(3).setNomineeName("Nominee D");
+	myNominees.get(3).setRelationshipToCustomer("Parent");
+	myNominees.get(3).setPercentage(0.25);
+	policy.setNominees(myNominees);
 	policy.setNumberNominees(myNominees.size());
 	
 	// Dummy session object

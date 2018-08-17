@@ -5,49 +5,51 @@
 package com.policy.data;
 
 public class Nominee {
-	private int nominee_id;
-	private String nominee_name;
-	private String relationship_to_customer;
-	private String purpose_of_changed;
-//	private double percentage;
-
+	private int nomineeId;
+	private String nomineeName;
+	private String relationshipToCustomer;
+	private String purposeOfChanged;
+	private double percentage; // Added by Patrick Yu on Aug 16, 2018
+	
 	public int getNomineeId() {
-		return nominee_id;
+		return nomineeId;
 	}
 
 	public void setNomineeId(int id) {
-		this.nominee_id = id;
+		this.nomineeId = id;
 	}
 
 	public String getNomineeName() {
-		return nominee_name;
+		return nomineeName;
 	}
 
 	public void setNomineeName(String name) {
-		this.nominee_name = name;
+		this.nomineeName = name;
 	}
 
 	public String getRelationshipToCustomer() {
-		return relationship_to_customer;
+		return relationshipToCustomer;
 	}
 
 	public void setRelationshipToCustomer(String relationship) {
-		this.relationship_to_customer = relationship;
+		this.relationshipToCustomer = relationship;
 	}
 
 	public String getPurposeOfChanged() {
-		return purpose_of_changed;
+		return purposeOfChanged;
 	}
 
 	public void setPurposeOfChanged(String purpose) {
-		this.purpose_of_changed = purpose;
+		this.purposeOfChanged = purpose;
 	}
 
-//	public double getPercentage() {
-//		return percentage;
-//	}
-//
-//	public void setPercentage(double percentage) {
-//		this.percentage = percentage;
-//	}
+	// Added by Patrick Yu on Aug 16, 2018
+	public double getPercentage() {
+		return percentage;
+	}
+
+	// Added by Patrick Yu on Aug 16, 2018
+	public void setPercentage(double percentage) {
+		this.percentage = percentage;
+	}
 }
