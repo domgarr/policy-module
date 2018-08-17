@@ -51,7 +51,6 @@ public class PolicyDao {
 			"pre_reqs = ? " +
 			"WHERE policy_id = ? ";
 	
-	
 	/**
 	 *  Will insert a policy object into the database.
 	 * @param policy - an instantiated Policy object.
@@ -147,7 +146,8 @@ public class PolicyDao {
 			System.out.println("Policy was not updated.");
 			return false;
 		}
-}
+	}
+	
 
 	
 	
