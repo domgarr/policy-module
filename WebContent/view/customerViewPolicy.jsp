@@ -7,8 +7,34 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%
 	// Dummy policy data	
+
 	ArrayList<Policy> policies = (ArrayList<Policy>)request.getAttribute("policies");
 	session.setAttribute("policy", policies.get(Integer.parseInt(request.getParameter("policy"))));
+	/*
+	Policy policy = new Policy();
+	policy.setPolicyId(1);
+	policy.setPolicyName("Tom cat");
+	policy.setTenure(1.1);
+	policy.setMinSum(100.50);
+	policy.setMaxSum(1000000.50);
+	policy.setPaymentsPerYear(2);
+	policy.setPremiumAmonut(2500);
+	policy.setStartDate(new Date());
+	
+	// Nominee data
+	List<Nominee> myNominees = new ArrayList<Nominee>();
+	myNominees.add(new Nominee());
+	myNominees.add(new Nominee());
+	myNominees.add(new Nominee());
+	myNominees.get(0).setNomineeName("Nominee A");
+	myNominees.get(1).setNomineeName("Nominee B");
+	myNominees.get(2).setNomineeName("Nominee C");
+	//policy.setNominees(myNominees);
+	policy.setNumberNominees(myNominees.size());
+	
+	// Dummy session object
+	session.setAttribute("policy", policy);
+*/
 	Policy myPolicy = (Policy)session.getAttribute("policy");
 	
 	// Get values from the session object
@@ -104,14 +130,14 @@ button {
 			%>
 			<tr>
 				<td class="tbl-labels">Nominee</td>
-				<td class="tbl-data"><%= policyNominees.get(i).getNomineeName() %></td>
-			</tr>
+<%-- 				<td class="tbl-data"><%= policyNominees.get(i).getNomineeName() %></td>
+ --%>			</tr>
 			<%
 				}
 			%>
 			<tr>
 				<td class="tbl-labels">Sum Assured</td>
-				<td class="tbl-data">$<%= sumAssured %></td>
+				<td class="tbl-data"><%= sumAssured %></td>
 			</tr>
 			<tr>
 				<td class="tbl-labels">Policy Expire Date</td>

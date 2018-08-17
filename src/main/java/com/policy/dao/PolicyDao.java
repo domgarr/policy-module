@@ -1,9 +1,9 @@
 package com.policy.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 import com.policy.data.Policy;
@@ -154,8 +154,16 @@ public class PolicyDao {
 		
 		return maxID;
 }
-	
-	public boolean update(Policy policy) throws SQLException, ClassNotFoundException {
+	/**
+	 * Added by Domenic Garreffa on Aug 16, 2018
+	 * 
+	 * Updates existing Policy where ID matches method paramter.
+	 * @param policy
+	 * @return True if Policy table was affected. IE. Policy was altered succesfully and false otherwise.
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public boolean update(Policy policy, int policyID) throws SQLException, ClassNotFoundException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -170,7 +178,7 @@ public class PolicyDao {
 		ps.setDouble(5, policy.getMinSum());
 		ps.setDouble(6, policy.getMaxSum());
 		ps.setString(7, policy.getPreReqs());
-		ps.setInt(8, policy.getPolicyId());
+		ps.setInt(8, policyID);
 
 		int rowsAffected = ps.executeUpdate();
 		
@@ -186,6 +194,104 @@ public class PolicyDao {
 			return false;
 		}
 }
+	
+	/**
+	 * Method to return a List of Policies. The list will simply contain every policy
+	 * in the database. 
+	 * 
+	 * Created by Nicholas Kauldhar on August 16 around 2pm
+	 * Updated by Nicholas Kauldhar August 17 around 9am since schema change
+	 * 
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public static List<Policy> getAllPolicies () throws SQLException, ClassNotFoundException {
+		Connection con = OracleConnection.INSTANCE.getConnection();
+		Statement st = con.createStatement();
+	
+		
+		ResultSet rs = st.executeQuery("Select * from Policies");
+		
+		
+		List<Policy> k = new ArrayList<Policy>();
+		
+		Policy temp;
+		while (rs.next()) {
+			temp = new Policy();
+			temp.setPolicyId(rs.getInt(1));
+			temp.setPolicyType(rs.getString(2));
+			temp.setPolicyName(rs.getString(3));
+			temp.setNumberNominees(rs.getInt(4));
+			temp.setTenure(rs.getDouble(5));
+			temp.setMinSum(rs.getDouble(6));
+			temp.setMaxSum(rs.getDouble(7));
+			temp.setPreReqs(rs.getString(8));
+			k.add(temp);
+		}
+		OracleConnection.INSTANCE.disconnect();
+		System.out.println(k.get(0).getPolicyId());
+		
+		return k;
+		
+	}
+
+	/**
+	 * Method used by Admin to generate certificates. It uses customer and 
+	 * policy ID to find a PolicyMap. It then stores the ID of that policy map
+	 * in the session object to be further used in other methods. Returns true if
+	 * a PolicyMap is returned and false otherwise.
+	 * 
+	 * Created by Nicholas Kauldhar on August 16 around 3pm
+	 * 
+	 * @param request
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public static boolean searchByCustandPolicy(HttpServletRequest request) throws SQLException, ClassNotFoundException {
+		String custid = request.getParameter("customerID");
+		System.out.println(custid);
+		int c = -1;
+		int d = -1;
+		String polid = request.getParameter("policyID");
+		System.out.println(polid);
+		try {
+			c = Integer.parseInt(custid);
+			d = Integer.parseInt(polid);
+		}
+		catch(Exception e) {
+			return false;
+		}
+		
+		try{
+			Connection con = OracleConnection.INSTANCE.getConnection();
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("Select * from PolicyMap where customer_id = " 
+			+ c + " and policy_id = " + d);
+			if(rs.next()) {
+				request.getSession().setAttribute("certificateMapID", rs.getInt(1));
+				return true;
+			}
+			else {
+				return false;
+			}
+			
+		
+		}
+		catch (Exception e) {
+			return false;
+		}
+		finally {
+			OracleConnection.INSTANCE.disconnect();
+		}
+		
+	}
+	
+	public static void main (String[] args) throws ClassNotFoundException, SQLException {
+		List<Policy> k = getAllPolicies();
+		System.out.println(k.get(0).getNumberNominees());
+	}
 
 	
 	

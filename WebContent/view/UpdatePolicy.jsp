@@ -5,7 +5,7 @@
 <%@ page import="java.sql.*,java.util.*, java.lang.*" %>
 
 
-<!DOCTYPE html> <!-- created by Hamza at 3pm   -->
+<!DOCTYPE html> <!-- created by Hamza on 16th Aug at 4pm   -->
 <html>
 <head>
   <meta charset="utf-8">
@@ -21,19 +21,14 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
   
-
-		   
-
-
-	</SCRIPT>
 </head>
 <body>
 <div class="container">
   <div  id="form_style" >
-  <form id="CreateFormUI" method= "post" action ="../MainServlet" onsubmit="getFormData(request,response)" >
+  <form id="CreateFormUI" method= "post" action ="../MainServlet" >
   	<div class="form-group">
 		<table align="center" >
-			<h1 align="center"> Register Policy </h1>
+			<h1 align="center"> Update Policy </h1>
 			<tr> 
 			
 				<td> Policy Name </td>
@@ -120,13 +115,12 @@
 		
 		<div class="clearfix" align="center">
 			
-			<input type="submit" value="Register" id="check" />
+			<input type="submit" value="Update" id="check" />
 			<button type="cancel" class="cancelbtn">Cancel</button>
 			
     	</div >
 		<div align="center">
 			<a href="url"></a>
-			<p><a href="#" style="color:dodgerblue">Click here</a> to login.</p>
 		</div>
 		</div>
 	</form>
@@ -135,5 +129,16 @@
 	</div>
 	
 	<script src = "../javascript/PolicyValidation.js"> </script>
+	
+
+<%-- 	<% 	HttpSession ses = request.getSession();
+	
+	String polName = ses.getAttribute("policy_name").toString();
+	%>
+	
+	<script> 
+	document.forms["CreateFormUI"]["min"].value=polName;
+	
+	</script> --%>
 </body>
 </html>
