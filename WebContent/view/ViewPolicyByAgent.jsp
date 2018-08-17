@@ -47,7 +47,7 @@ hses.setAttribute("custid", custid_list);
 
 String custid = request.getParameter("custid");
 hses.setAttribute("cust", custid);
-ArrayList<String> policyid_list = obj.getPolicies(custid); //RETRIEVE POLICY ARRAY
+ArrayList<String> policyid_list = obj.getPolicies(agentid, custid); //RETRIEVE POLICY ARRAY
 
 hses.setAttribute("policyid", policyid_list);
 
