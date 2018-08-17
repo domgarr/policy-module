@@ -2,7 +2,7 @@ package com.policy.controller;
 
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +31,12 @@ public class MainServlet extends HttpServlet {
 			case "viewPolicyBackButton": 
 				request.getSession().removeAttribute("policy");
 				response.sendRedirect("view/admin.jsp");
+				break;
+			case "viewPolicy":
+				ArrayList<Policy> policies = (ArrayList<Policy>)request.getSession().getAttribute("policies");
+				System.out.println("WTF" + request.getParameter("policy") + " po: " + policies.size() );
+				request.getSession().setAttribute("policy", policies.get(Integer.parseInt(request.getParameter("policy"))));
+				response.sendRedirect("view/customerViewPolicy.jsp");
 				break;
 		}
 			return;

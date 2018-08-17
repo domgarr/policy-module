@@ -75,17 +75,16 @@
 	</tr>
 	<tr>
 		<td>
-  			<form action="customerViewPolicy.jsp">
+  			<form  method = "get" action="../MainServlet">
 				<select name="policy" >
 				<%for(int i = 0; i<policies.size(); i++){
 					Policy p = policies.get(i);%>  
-					<option value=i><%= p.getPolicyName() %></option>
+					<option value=<%=i %>><%= p.getPolicyName() %></option>
 					<%} %>
 				</select> 
-				<input type="submit" value="Submit">
+				<button class="btn btn-primary btn-lg" type = "submit" name="action" value="viewPolicy"> view </button>
 			</form>
 		</td>
-		<td><button type="button" onclick="window.location.href = 'customerViewPolicy.jsp';" value="policyDetails">View Policy Details</button></td>
 	</tr>
 	</table>
 </body>

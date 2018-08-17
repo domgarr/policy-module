@@ -8,8 +8,6 @@
 <%
 	// Dummy policy data	
 
-	ArrayList<Policy> policies = (ArrayList<Policy>)request.getAttribute("policies");
-	session.setAttribute("policy", policies.get(Integer.parseInt(request.getParameter("policy"))));
 	/*
 	Policy policy = new Policy();
 	policy.setPolicyId(1);
